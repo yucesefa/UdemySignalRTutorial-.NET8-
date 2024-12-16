@@ -1,3 +1,5 @@
+using UdemySignalR.Web.Hubs;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -16,7 +18,7 @@ if (!app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
-
+app.MapHub<ExampleHub>("/examplehub");
 app.UseRouting();
 
 app.UseAuthorization();
