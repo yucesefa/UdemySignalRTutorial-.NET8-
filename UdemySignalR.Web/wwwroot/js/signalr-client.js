@@ -1,7 +1,7 @@
 ﻿$(document).ready(function () {
     const broadcastMessageToAllClientHubMethodCall = "BroadcastMessageAllClient";
     const receiveMessageForAllClientMethodCall = "ReceiveMessageForAllClient";
-    const connection = new signalR.HubConnectionBuilder().withUrl("/examplehub").configureLogging(signalR.LogLevel.Information).build();
+    const connection = new signalR.HubConnectionBuilder().withUrl("/exampletypesafehub").configureLogging(signalR.LogLevel.Information).build();
     // ilk bağlantı(protokol) rest mimarisi ile istek atılır.=>get/post/put
     //ardındaki süreç web socket ile bğlantı sağlanr
     //signalr desteklemiyorsa Server-Sent Events ya da Long Polling ile çift taraflı bağlantı sağlanır
