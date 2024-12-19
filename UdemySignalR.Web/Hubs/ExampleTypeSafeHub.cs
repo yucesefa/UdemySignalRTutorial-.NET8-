@@ -22,6 +22,14 @@ namespace UdemySignalR.Web.Hubs
             await Clients.Others.ReceiveMessageForOthersClient(message);
 
         }
+
+        public async Task BroadcastMessageToIndividualClient( string connectionId ,string message)
+        {
+
+            await Clients.Client(connectionId).ReceiveMessageForIndividualClient(message);
+
+        }
+
         public async override Task OnConnectedAsync()
         {
             connectedClientCount++;
