@@ -5,7 +5,7 @@ namespace UdemySignalR.Web.Hubs
     public class ExampleTypeSafeHub:Hub<IExampleTypeSafeHub>
     {
         private static int connectedClientCount = 0;
-        public async Task BroadcastMessageAllClient(string message)
+        public async Task BroadcastMessageToAllClient(string message)
         {
             await Clients.All.ReceiveMessageForAllClient(message);
 
@@ -21,6 +21,12 @@ namespace UdemySignalR.Web.Hubs
             connectedClientCount--;
             await Clients.All.ReceiveConnectedClientCountAllClient(connectedClientCount);
             await base.OnDisconnectedAsync(exception);
+        }
+        public async Task BroadcastMessageToCallerClient(string message)
+        {
+
+            await Clients.Caller.ReceiveMessageForCallerClient(message);
+
         }
     }
 }

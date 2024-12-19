@@ -1,11 +1,17 @@
 ﻿$(document).ready(function () {
-    const broadcastMessageToAllClientHubMethodCall = "BroadcastMessageAllClient";
-    const receiveMessageForAllClientMethodCall = "ReceiveMessageForAllClient";
-    const receiveConnectedClientCountAllClient = "ReceiveConnectedClientCountAllClient"
+
     const connection = new signalR.HubConnectionBuilder().withUrl("/exampletypesafehub").configureLogging(signalR.LogLevel.Information).build();
     // ilk bağlantı(protokol) rest mimarisi ile istek atılır.=>get/post/put
     //ardındaki süreç web socket ile bğlantı sağlanr
     //signalr desteklemiyorsa Server-Sent Events ya da Long Polling ile çift taraflı bağlantı sağlanır
+    const broadcastMessageToAllClientHubMethodCall = "BroadcastMessageToAllClient";
+    const receiveMessageForAllClientMethodCall = "ReceiveMessageForAllClient";
+
+    const broadcastMessageToCallerClient = "BroadcastMessageToCallerClient";
+    const receiveMessageForCallerClient = "ReceiveMessageForCallerClient";
+
+    const receiveConnectedClientCountAllClient = "ReceiveConnectedClientCountAllClient"
+
 
     function start() {
         connection.start().then(() => console.log("Hub ile Bağlantı Kuruldu!"));
@@ -18,6 +24,9 @@
     }
     connection.on(receiveMessageForAllClientMethodCall, (message) => {
         console.log("Gelen Mesaj", message);
+    })
+    connection.on(receiveMessageForCallerClient, (message) => {
+        console.log("(Caller)Gelen Mesaj", message);
     })
 
     var span_client_count = $("#span-connected-client-count");
@@ -34,4 +43,11 @@
 
         connection.invoke(broadcastMessageToAllClientHubMethodCall, message).catch(err => console.error("hata", err));
     })
+    $("#btn-send-message-caller-client").click(function () {
+        const message = "sasaasassasa";
+
+        connection.invoke(broadcastMessageToCallerClient, message).catch(err => console.error("hata", err));
+    })
+
+   
 })
