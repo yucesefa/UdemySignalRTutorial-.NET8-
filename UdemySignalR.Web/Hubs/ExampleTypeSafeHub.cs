@@ -10,6 +10,18 @@ namespace UdemySignalR.Web.Hubs
             await Clients.All.ReceiveMessageForAllClient(message);
 
         }
+        public async Task BroadcastMessageToCallerClient(string message)
+        {
+
+            await Clients.Caller.ReceiveMessageForCallerClient(message);
+
+        }
+        public async Task BroadcastMessageToOtherClient(string message)
+        {
+
+            await Clients.Others.ReceiveMessageForOthersClient(message);
+
+        }
         public async override Task OnConnectedAsync()
         {
             connectedClientCount++;
@@ -22,11 +34,6 @@ namespace UdemySignalR.Web.Hubs
             await Clients.All.ReceiveConnectedClientCountAllClient(connectedClientCount);
             await base.OnDisconnectedAsync(exception);
         }
-        public async Task BroadcastMessageToCallerClient(string message)
-        {
-
-            await Clients.Caller.ReceiveMessageForCallerClient(message);
-
-        }
+       
     }
 }

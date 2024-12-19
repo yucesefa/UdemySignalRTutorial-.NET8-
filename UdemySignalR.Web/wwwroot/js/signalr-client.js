@@ -10,6 +10,9 @@
     const broadcastMessageToCallerClient = "BroadcastMessageToCallerClient";
     const receiveMessageForCallerClient = "ReceiveMessageForCallerClient";
 
+    const broadcastMessageToOtherClient = "BroadcastMessageToOtherClient";
+    const receiveMessageForOthersClient = "ReceiveMessageForOthersClient";
+
     const receiveConnectedClientCountAllClient = "ReceiveConnectedClientCountAllClient"
 
 
@@ -22,14 +25,21 @@
     catch {
         setTimeout(() => start(), 5000) //5 saniye sonra tekrardan start metoduna döncek 
     }
+    //subscribe
     connection.on(receiveMessageForAllClientMethodCall, (message) => {
         console.log("Gelen Mesaj", message);
     })
     connection.on(receiveMessageForCallerClient, (message) => {
         console.log("(Caller)Gelen Mesaj", message);
     })
+    connection.on(receiveMessageForOthersClient, (message) => {
+        console.log("(Other)Gelen Mesaj", message);
+    })
 
-    var span_client_count = $("#span-connected-client-count");
+
+
+
+    const span_client_count = $("#span-connected-client-count");
     connection.on(receiveConnectedClientCountAllClient, (count) => {
         span_client_count.text(count);
         console.log("connected client count", count);
@@ -48,6 +58,10 @@
 
         connection.invoke(broadcastMessageToCallerClient, message).catch(err => console.error("hata", err));
     })
+    $("#btn-send-message-other-client").click(function () {
+        const message = "(other)sasaasassasa";
 
+        connection.invoke(broadcastMessageToOtherClient, message).catch(err => console.error("hata", err));
+    })
    
 })
