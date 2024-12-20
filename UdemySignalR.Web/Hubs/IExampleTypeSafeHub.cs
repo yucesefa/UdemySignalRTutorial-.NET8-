@@ -8,6 +8,8 @@
         Task ReceiveMessageForIndividualClient(string message);
         Task ReceiveConnectedClientCountAllClient(int clientCount);
 
+        Task ReceiveMessageForGroupClients(string message);
+
         
         
     }

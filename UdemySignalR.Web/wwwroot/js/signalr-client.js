@@ -16,7 +16,69 @@
     const broadcastMessageToIndividualClient = "BroadcastMessageToIndividualClient";
     const receiveMessageForIndividualClient = "ReceiveMessageForIndividualClient";
 
-    const receiveConnectedClientCountAllClient = "ReceiveConnectedClientCountAllClient"
+    const receiveConnectedClientCountAllClient = "ReceiveConnectedClientCountAllClient";
+
+
+    const broadCastMessageToGroupClients = "BroadCastMessageToGroupClients";
+    const receiveMessageForGroupClients = "ReceiveMessageForGroupClients";
+
+    const groupA = "GroupA";
+    const groupB = "GroupB";
+    let currentGroupList = [];
+
+    function refreshGroupList() {
+        $("#groupList").empty();
+        currentGroupList.forEach(x => {
+            $("#groupList").append(`<p>${x}</p>`)
+        })
+    }
+    $("#btn-groupA-add").click(function () {
+        if (currentGroupList.includes(groupA)) return;
+
+        connection.invoke("AddGroup", groupA).then(() => {
+            currentGroupList.push(groupA);
+            refreshGroupList();
+        })
+    })
+    $("#btn-groupA-remove").click(function () {
+        if (!currentGroupList.includes(groupA)) return;
+        connection.invoke("RemoveGroup", groupA).then(() => {
+            currentGroupList = currentGroupList.filter(x => x === !groupA);
+            refreshGroupList();
+        })
+    })
+
+    $("#btn-groupB-add").click(function () {
+        if (currentGroupList.includes(groupB)) return;
+        connection.invoke("AddGroup", groupB).then(() => {
+            currentGroupList.push(groupB);
+            refreshGroupList();
+        })
+    })
+
+    $("#btn-groupB-remove").click(function () {
+        if (!currentGroupList.includes(groupB)) return;
+        connection.invoke("RemoveGroup", groupB).then(() => {
+            currentGroupList = currentGroupList.filter(x => x === !groupB);
+            refreshGroupList();
+        })
+    })
+
+
+    $("#btn-groupA-send-message").click(function () {
+        const message = "Grup A Mesaj";
+        connection.invoke(broadCastMessageToGroupClients, groupA, message).catch(err => console.error("hata", err));
+        console.log("mesaj gönderildi");
+    })
+    $("#btn-groupB-send-message").click(function () {
+        const message = "Grup B Mesaj";
+        connection.invoke(broadCastMessageToGroupClients, groupB, message).catch(err => console.error("hata", err));
+        console.log("mesaj gönderildi");
+    })
+    connection.on(receiveMessageForGroupClients, (message) => {
+        console.log("Gelen Mesaj", message);
+    })
+
 
 
     function start() {

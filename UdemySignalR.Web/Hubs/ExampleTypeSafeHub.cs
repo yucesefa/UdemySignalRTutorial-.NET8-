@@ -30,6 +30,33 @@ namespace UdemySignalR.Web.Hubs
 
         }
 
+        public async Task BroadCastMessageToGroupClients(string groupName,string message)
+        {
+            await Clients.Group(groupName).ReceiveMessageForGroupClients(message);
+        }
+        public async Task AddGroup(string groupName)
+        {
+            await Groups.AddToGroupAsync(Context.ConnectionId, groupName);
+
+            await Clients.Caller.ReceiveMessageForCallerClient($"{groupName} Grubuna Eklendin");
+
+            //await Clients.Others.ReceiveMessageForOthersClient($"Kullanıcı({Context.ConnectionId}) {groupName} dahil oldu");
+
+            await Clients.Group(groupName).ReceiveMessageForGroupClients($"Kullanıcı({Context.ConnectionId}) {groupName} dahil oldu");
+        }
+        public async Task RemoveGroup(string groupName)
+        {
+            await Groups.RemoveFromGroupAsync(Context.ConnectionId, groupName);
+
+            await Clients.Caller.ReceiveMessageForCallerClient($"{groupName} grubundan çıktınız");
+
+            //await Clients.Others.ReceiveMessageForOthersClient($"Kullanıcı({Context.ConnectionId}) {groupName} grubundan çıktı");
+
+            await Clients.Group(groupName).ReceiveMessageForGroupClients($"Kullanıcı({Context.ConnectionId}) {groupName} grubundan çıktı");
+        }
+
+
+
         public async override Task OnConnectedAsync()
         {
             connectedClientCount++;
