@@ -15,4 +15,11 @@ connection.On<Product>(methodName: "ReceiveTypedMessageForAllClient", handler: (
     Console.WriteLine($"Received Message:{product.Id}-{product.Name}-{product.Price}");
 
 });
-Console.ReadKey();
+while (true)
+{
+    var key = Console.ReadLine();
+    if (key == "exit") break;
+
+    var newProduct = new Product(200, "pen 200", 250);
+    await connection.InvokeAsync("BroadcastTypedMessageToAllClient", newProduct);
+}
