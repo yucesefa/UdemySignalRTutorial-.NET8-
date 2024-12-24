@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.SignalR;
+using UdemySignalR.Web.Models;
 
 namespace UdemySignalR.Web.Hubs
 {
@@ -8,6 +9,11 @@ namespace UdemySignalR.Web.Hubs
         public async Task BroadcastMessageToAllClient(string message)
         {
             await Clients.All.ReceiveMessageForAllClient(message);
+
+        }
+        public async Task BroadcastTypedMessageToAllClient(Product product)
+        {
+            await Clients.All.ReceiveTypedMessageForAllClient(product);
 
         }
         public async Task BroadcastMessageToCallerClient(string message)

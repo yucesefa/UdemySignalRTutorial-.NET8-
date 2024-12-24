@@ -22,6 +22,9 @@
     const broadCastMessageToGroupClients = "BroadCastMessageToGroupClients";
     const receiveMessageForGroupClients = "ReceiveMessageForGroupClients";
 
+    const receiveTypedMessageForAllClient = "ReceiveTypedMessageForAllClient";
+    const broadcastTypedMessageToAllClient = "BroadcastTypedMessageToAllClient";
+
     const groupA = "GroupA";
     const groupB = "GroupB";
     let currentGroupList = [];
@@ -119,7 +122,11 @@
     connection.on(receiveConnectedClientCountAllClient, (count) => {
         console.log("Gelen Mesaj", message);
     })
+    connection.on(receiveTypedMessageForAllClient, (product) => {
+        console.log("Gelen Mesaj", product);
+    })
 
+    //click
     $("#btn-send-message-all-client").click(function () {
         const message = "sasaasassasa";
         connection.invoke(broadcastMessageToAllClientHubMethodCall, message).catch(err => console.error("hata", err));
@@ -142,5 +149,10 @@
         console.log("mesaj gönderildi");
 
     })
+    $("#btn-send-typed-message-all-client").click(function () {
+        const product = { id: 1, name: "pen 1", price: 200 };
+        connection.invoke(broadcastTypedMessageToAllClient, product).catch(err => console.error("hata", err));
+        console.log("ürün gönderildi");
 
+    });
 })
