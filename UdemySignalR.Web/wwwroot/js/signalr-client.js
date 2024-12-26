@@ -27,7 +27,31 @@
 
     const groupA = "GroupA";
     const groupB = "GroupB";
-    let currentGroupList = [];
+    let currentGroupList = []; 
+
+
+
+    $(document).ready(function () {
+        const connection = new signalR.HubConnectionBuilder().withUrl("/exampletypesafehub").configureLogging(signalR.LogLevel.Information).build();
+        async function start() {
+            try {
+                await connection.start().then(() => {
+                    console.log("Hub ile Bağlantı Kuruldu!");
+                    $("#connectionId").html(`Connection Id:${connection.connectionId}`);
+                });
+            }
+            catch (err) {
+                console.error("hub ile bağlantı kurulamadı", err);
+                setTimeout(() => start(), 5000) //5 saniye sonra tekrardan start metoduna döncek 
+            }
+        }
+        connection.onclose(async () => {
+            await start();
+        })
+        start();
+
+    });
+
 
     function refreshGroupList() {
         $("#groupList").empty();

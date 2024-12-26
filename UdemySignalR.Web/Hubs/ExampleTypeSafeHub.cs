@@ -62,6 +62,28 @@ namespace UdemySignalR.Web.Hubs
         }
 
 
+        public async Task BroadCastStreamDataToAllClient(IAsyncEnumerable<string> nameAsChunks)
+        {
+           await foreach (var name in nameAsChunks)
+            {
+                await Task.Delay(1000);
+                await Clients.All.ReceiveMessageAsStreamForAllClient(name);
+                //js tarafında async olarak veri göndercek receive metodu aldıkca client'ları bilgilendiricek
+            }
+
+        }
+
+        public async Task BroadCastStreamProductToAllClient(IAsyncEnumerable<Product> productAsChunks)
+        {
+            await foreach (var product in productAsChunks)
+            {
+                await Task.Delay(1000);
+                await Clients.All.ReceiveProductAsStreamForAllClient(product);
+                //js tarafında async olarak veri göndercek receive metodu aldıkca client'ları bilgilendiricek
+            }
+
+        }
+
 
         public async override Task OnConnectedAsync()
         {

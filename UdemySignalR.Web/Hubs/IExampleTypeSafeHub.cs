@@ -13,6 +13,9 @@ namespace UdemySignalR.Web.Hubs
 
         Task ReceiveMessageForGroupClients(string message);
 
+        Task ReceiveMessageAsStreamForAllClient(string name);
+        Task ReceiveProductAsStreamForAllClient(Product product);
+
         
         
     }
