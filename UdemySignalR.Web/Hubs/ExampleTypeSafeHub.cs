@@ -85,6 +85,17 @@ namespace UdemySignalR.Web.Hubs
         }
 
 
+        public async IAsyncEnumerable<string> BroadCastFromHubToClient(int count)
+        {
+            foreach (var item in Enumerable.Range(1, count).ToList())
+            {
+                await Task.Delay(1000);
+                yield return $"{item}.data";
+                //yield keywordu metodun ya da property nin birer birer döndürmesini sağlar
+            }     
+        } 
+
+
         public async override Task OnConnectedAsync()
         {
             connectedClientCount++;

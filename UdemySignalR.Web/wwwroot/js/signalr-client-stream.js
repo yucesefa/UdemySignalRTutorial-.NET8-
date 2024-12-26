@@ -2,7 +2,7 @@
     const connection = new signalR.HubConnectionBuilder().withUrl("/exampletypesafehub").configureLogging(signalR.LogLevel.Information).build();
     async function start() {
         try {
-           await connection.start().then(() => {
+            await connection.start().then(() => {
                 console.log("Hub ile Bağlantı Kuruldu!");
                 $("#connectionId").html(`Connection Id:${connection.connectionId}`);
             });
@@ -21,6 +21,8 @@
 
     const broadCastStreamProductToAllClient = "BroadCastStreamProductToAllClient";
     const receiveProductAsStreamForAllClient = "ReceiveProductAsStreamForAllClient";
+
+    const broadCastFromHubToClient = "BroadCastFromHubToClient";
 
     //subscribe
     connection.on(receiveMessageAsStreamForAllClient, (name) => {
@@ -52,9 +54,9 @@
     $("#btn_FromClient_ToHub2").click(function () {
 
         const productList = [
-            {id:1,name:"pen 1",price:100},
-            {id:2,name:"pen 2",price:200},
-            {id:3,name:"pen 3",price:300}
+            { id: 1, name: "pen 1", price: 100 },
+            { id: 2, name: "pen 2", price: 200 },
+            { id: 3, name: "pen 3", price: 300 }
         ]
 
         const subject = new signalR.Subject();
@@ -69,10 +71,15 @@
     })
 
 
+    $("#btn_FromHub_ToClient").click(function () {
 
+        connection.stream(broadCastFromHubToClient, 5).subscribe(
+            {
+                next: (message) => $("#streamBox").append(`<p>${message}</p>`)
+            });
 
+    });
 
     start();
-
 });
 
