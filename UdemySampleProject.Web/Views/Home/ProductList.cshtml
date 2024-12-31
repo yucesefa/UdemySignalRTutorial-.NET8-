@@ -1,8 +1,38 @@
-﻿
-@{
+﻿@{
     ViewData["Title"] = "ProductList";
 }
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $("#btn-create-excel").click(function () {
+                $.ajax({
+                    url: "/Home/CreateExcel",
+                    dataType: "json",
+                    success: function (data) {
+                        $(".toast-body").html("Excel Oluşturma İsteği Alımıştır.Tamamlandığında Bilgilendirileceksiniz");
+                        $("#liveToast").show();
+                        toastTimeout = setTimeout(() => {
+                            $("#liveToast").hide();
+                        }, 3000)
+                    },
+                    error: function (err) {
+                        console.error(err);
+                    }
+                })
+            })
+        })
+    </script>
+
+}
+
+
+
 @model List<Product>
+
+<p>
+    <a class="btn btn-primary" href="#" id="btn-create-excel">Create Excel</a>
+</p>
 <h1>ProductList</h1>
 <table class="table">
     <thead>

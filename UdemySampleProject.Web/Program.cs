@@ -1,12 +1,21 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection.Extensions;
+using System.Threading.Channels;
 using UdemySampleProject.Web.Models;
+using UdemySampleProject.Web.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
+builder.Services.AddScoped<FileService>();
+builder.Services.TryAddSingleton(Channel.CreateUnbounded<(string userId,List<Product> products)>());
+//1.way
+//builder.Services.TryAddSingleton(Channel.CreateUnbounded<Tuple<string,List<Product>>>());
+
+builder.Services.AddHttpContextAccessor();
 builder.Services.AddDbContext<AppDbContext>(option =>
 {
     option.UseSqlServer(builder.Configuration.GetConnectionString("SqlServer"));
