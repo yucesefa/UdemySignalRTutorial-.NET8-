@@ -5,9 +5,11 @@ VisualStudioVersion = 17.9.34622.214
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UdemySignalR.Web", "UdemySignalR.Web\UdemySignalR.Web.csproj", "{2CD8294A-902E-4B11-90B3-60339BBF6739}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SignalRClientConsoleApp", "SignalRClientConsoleApp\SignalRClientConsoleApp.csproj", "{2650F210-E022-4A9C-A885-AAB685EA922A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SignalRClientConsoleApp", "SignalRClientConsoleApp\SignalRClientConsoleApp.csproj", "{2650F210-E022-4A9C-A885-AAB685EA922A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SignalRClientWorkerServiceApp", "SignalRClientWorkerServiceApp\SignalRClientWorkerServiceApp.csproj", "{99BFA1E3-9B10-406E-B698-6EA597366D8A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SignalRClientWorkerServiceApp", "SignalRClientWorkerServiceApp\SignalRClientWorkerServiceApp.csproj", "{99BFA1E3-9B10-406E-B698-6EA597366D8A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UdemySignalR.API", "UdemySignalR.API\UdemySignalR.API.csproj", "{A4C5C741-3151-464A-BC81-54C6886A285C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{99BFA1E3-9B10-406E-B698-6EA597366D8A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{99BFA1E3-9B10-406E-B698-6EA597366D8A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{99BFA1E3-9B10-406E-B698-6EA597366D8A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A4C5C741-3151-464A-BC81-54C6886A285C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A4C5C741-3151-464A-BC81-54C6886A285C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A4C5C741-3151-464A-BC81-54C6886A285C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A4C5C741-3151-464A-BC81-54C6886A285C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,0 +1,40 @@
+﻿@{
+    ViewData["Title"] = "APIHubContextExample";
+}
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            const connection = new signalR.HubConnectionBuilder().withUrl("https://localhost:7064/myhub").configureLogging(signalR.LogLevel.Information).build();
+            async function start() {
+                try {
+                    await connection.start().then(() => {
+                        console.log("Hub ile Bağlantı Kuruldu!");
+                        $("#connectionId").html(`Connection Id:${connection.connectionId}`);
+                    });
+                }
+                catch (err) {
+                    console.error("hub ile bağlantı kurulamadı", err);
+                    setTimeout(() => start(), 5000) //5 saniye sonra tekrardan start metoduna döncek
+                }
+            }
+            connection.onclose(async () => {
+                await start();
+            })
+            connection.on("ReceiveMessageForAllClient", (message) => {
+                console.log("Gelen Mesaj(API Hub)", message);
+            })
+            start();
+
+            $("#btn").click(function () {
+                const message = "sasaasassasa";
+                connection.invoke("BroadcastMessageToAllClient", message).catch(err => console.error("hata", err));
+                console.log("mesaj gönderildi");
+            })
+        })
+
+    </script>
+}
+<h1>APIHubContextExample</h1>
+
+<button id="btn" class="btn btn-primary">API Hub'a Mesaj Gönder'</button>
+

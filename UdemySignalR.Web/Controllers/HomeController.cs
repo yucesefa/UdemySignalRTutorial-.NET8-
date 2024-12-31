@@ -32,5 +32,9 @@ namespace UdemySignalR.Web.Controllers
         {
             return View();
         }
+        public IActionResult APIHubContextExample()
+        {
+            return View();
+        }
     }
 }
