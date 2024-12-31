@@ -11,6 +11,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SignalRClientWorkerServiceA
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UdemySignalR.API", "UdemySignalR.API\UdemySignalR.API.csproj", "{A4C5C741-3151-464A-BC81-54C6886A285C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UdemySampleProject.Web", "UdemySampleProject.Web\UdemySampleProject.Web.csproj", "{FFCC7299-E119-45A5-845C-F60BE62AF162}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{A4C5C741-3151-464A-BC81-54C6886A285C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A4C5C741-3151-464A-BC81-54C6886A285C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A4C5C741-3151-464A-BC81-54C6886A285C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FFCC7299-E119-45A5-845C-F60BE62AF162}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FFCC7299-E119-45A5-845C-F60BE62AF162}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FFCC7299-E119-45A5-845C-F60BE62AF162}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FFCC7299-E119-45A5-845C-F60BE62AF162}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
