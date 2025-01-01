@@ -9,9 +9,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SignalRClientConsoleApp", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SignalRClientWorkerServiceApp", "SignalRClientWorkerServiceApp\SignalRClientWorkerServiceApp.csproj", "{99BFA1E3-9B10-406E-B698-6EA597366D8A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UdemySignalR.API", "UdemySignalR.API\UdemySignalR.API.csproj", "{A4C5C741-3151-464A-BC81-54C6886A285C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UdemySignalR.API", "UdemySignalR.API\UdemySignalR.API.csproj", "{A4C5C741-3151-464A-BC81-54C6886A285C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UdemySampleProject.Web", "UdemySampleProject.Web\UdemySampleProject.Web.csproj", "{FFCC7299-E119-45A5-845C-F60BE62AF162}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UdemySampleProject.Web", "UdemySampleProject.Web\UdemySampleProject.Web.csproj", "{FFCC7299-E119-45A5-845C-F60BE62AF162}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CovidChart.API", "CovidChart.API\CovidChart.API.csproj", "{F06F1D57-1AB5-4CB5-9C3A-4F78888D8393}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{FFCC7299-E119-45A5-845C-F60BE62AF162}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FFCC7299-E119-45A5-845C-F60BE62AF162}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FFCC7299-E119-45A5-845C-F60BE62AF162}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F06F1D57-1AB5-4CB5-9C3A-4F78888D8393}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F06F1D57-1AB5-4CB5-9C3A-4F78888D8393}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F06F1D57-1AB5-4CB5-9C3A-4F78888D8393}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F06F1D57-1AB5-4CB5-9C3A-4F78888D8393}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
