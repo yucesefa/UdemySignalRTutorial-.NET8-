@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.FileProviders;
 using System.Threading.Channels;
+using UdemySampleProject.Web;
 using UdemySampleProject.Web.BackgroundServices;
 using UdemySampleProject.Web.Models;
 using UdemySampleProject.Web.Services;
@@ -25,6 +26,7 @@ builder.Services.AddDbContext<AppDbContext>(option =>
 builder.Services.AddIdentity<IdentityUser,IdentityRole>().AddEntityFrameworkStores<AppDbContext>();
 
 builder.Services.AddHostedService<CreateExcelBackgroundService>();
+builder.Services.AddSignalR();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -37,7 +39,7 @@ if (!app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
-
+app.MapHub<AppHub>("/hub");
 app.UseRouting();
 
 app.UseAuthorization();

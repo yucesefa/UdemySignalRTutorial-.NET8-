@@ -45,29 +45,19 @@ namespace UdemySampleProject.Web.BackgroundServices
                 wb.SaveAs(excelFileStream);
 
 
-                //using (var scope = serviceProvider.CreateScope())
-                //{
-                //    var appHub = scope.ServiceProvider.GetRequiredService<IHubContext<AppHub>>();
+                //HUB
 
+                using (var scope = serviceProvider.CreateScope())
+                {
+                    var appHub = scope.ServiceProvider.GetRequiredService<IHubContext<AppHub>>();
 
-                //    await appHub.Clients.User(userId).SendAsync("AlertCompleteFile", $"/files/{newExcelFileName}", stoppingToken);
+                    await appHub.Clients.User(userId).SendAsync("AlertCompleteFile", $"/files/{newExcelFileName}", stoppingToken);
 
-
-
-                //}
-
-
-
-
+                }
 
             }
 
-
-
-
         }
-
-
 
         private DataTable GetTable(string tableName, List<Product> products)
         {
