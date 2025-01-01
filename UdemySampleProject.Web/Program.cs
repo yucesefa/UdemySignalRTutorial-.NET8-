@@ -1,7 +1,9 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection.Extensions;
+using Microsoft.Extensions.FileProviders;
 using System.Threading.Channels;
+using UdemySampleProject.Web.BackgroundServices;
 using UdemySampleProject.Web.Models;
 using UdemySampleProject.Web.Services;
 
@@ -9,7 +11,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-
+builder.Services.AddSingleton<IFileProvider>(new PhysicalFileProvider(Directory.GetCurrentDirectory()));
 builder.Services.AddScoped<FileService>();
 builder.Services.TryAddSingleton(Channel.CreateUnbounded<(string userId,List<Product> products)>());
 //1.way
@@ -20,8 +22,9 @@ builder.Services.AddDbContext<AppDbContext>(option =>
 {
     option.UseSqlServer(builder.Configuration.GetConnectionString("SqlServer"));
 });
-builder.Services.AddIdentity<IdentityUser,IdentityRole>().AddEntityFrameworkStores<AppDbContext>(); 
+builder.Services.AddIdentity<IdentityUser,IdentityRole>().AddEntityFrameworkStores<AppDbContext>();
 
+builder.Services.AddHostedService<CreateExcelBackgroundService>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
