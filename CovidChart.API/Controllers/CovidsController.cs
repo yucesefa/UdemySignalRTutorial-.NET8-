@@ -1,5 +1,4 @@
 ﻿using CovidChart.API.Models;
-using CovidChart.API.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -19,22 +18,22 @@ namespace CovidChart.API.Controllers
         public async Task<IActionResult> SaveCovid(Covid covid)
         {
             await _covidService.SaveCovid(covid);
-            IQueryable<Covid> covidList = _covidService.GetList();
-            return Ok(covidList);
+            //IQueryable<Covid> covidList = _covidService.GetList();
+            return Ok(_covidService.GetCovidChartList());
         }
         [HttpGet]
-        public async Task<IActionResult> InitializeCovid()
+        public IActionResult InitializeCovid()
         {
             Random random = new Random();
-            foreach (var item in Enumerable.Range(1, 10))
+            Enumerable.Range(1, 10).ToList().ForEach(x =>
             {
-                foreach (ECity item1 in Enum.GetValues(typeof(ECity)))
+                foreach (ECity item in Enum.GetValues(typeof(ECity)))
                 {
-                    var newCovid = new Covid { City = item1, Count = random.Next(100, 1000), CovidDate = DateTime.Now.AddDays(2) };
-                    await _covidService.SaveCovid(newCovid);
+                    var newcovid = new Covid { City = item, Count = random.Next(100, 1000), CovidDate = DateTime.Now.AddDays(x) };
+                    _covidService.SaveCovid(newcovid).Wait();
                     System.Threading.Thread.Sleep(1000);
                 }
-            }
+            });
             return Ok("Covid 19 dataları veritabanına kaydedildi");
         }
     }
